@@ -1,0 +1,60 @@
+<Page class="page" 
+    xmlns="http://schemas.nativescript.org/tns.xsd" 
+    xmlns:sd="nativescript-ui-sidedrawer"
+    xmlns:customControls="shared"
+    navigatingTo="onNavigatingTo" >
+
+    <ActionBar class="action-bar">
+        <!--<NavigationButton tap="onBackButtonTap" android.systemIcon="ic_menu_back" android:visibility="collapsed" />-->
+        <NavigationButton tap="onBackButtonTap" android.systemIcon="ic_menu_back" />
+        <Label class="action-bar-title" text="Session Details" horizontalAlignment="center" />
+    </ActionBar>
+
+    <sd:RadSideDrawer id="sideDrawer">
+
+        <!-- side drawer content -->
+        <sd:RadSideDrawer.drawerContent>
+            <customControls:sidedrawer />
+        </sd:RadSideDrawer.drawerContent>
+
+        <!-- The main content -->
+        <sd:RadSideDrawer.mainContent>
+
+            <StackLayout class="page-content">
+                <ScrollView>
+
+                    <GridLayout rows="auto, auto, *">
+                        
+                        <GridLayout row="0" rows="*, *, *" columns="*">
+                            <Label row="0" text="{{ session.sessionTitle }}" class="t-25 m-20 text-center" textWrap="true"/>
+                            <Label row="1" text="Keynote" class="t-18 p-l-15 p-b-10 p-r-15 text-center text-secondary" textWrap="true"/>
+                            <Label row="2" text="{{ session.level }}" class="t-18 p-l-15 p-b-10 p-r-15 text-center text-secondary" textWrap="true"/>
+                        </GridLayout>
+
+                        <StackLayout row="1" class="hr-light m-t-5 m-b-5" columns="*" />
+
+                        <GridLayout row="2" rows="*, *, *, *, *, *, *, *, *, *" columns="*">
+                            <Label row="0" text="Presenter:" class="t-16 p-l-15 p-b-6 p-r-15 text-secondary" textWrap="true"/>
+                            <Label row="1" text="{{ session.firstName + ' ' + session.lastName }}" class="t-18 p-l-15 p-b-15 p-r-15 session-info-blue" textWrap="true" tap="onPresenterTapped"/>
+                            <Label row="2" text="Audience:" class="t-16 p-l-15 p-b-6 p-r-15 text-secondary" textWrap="true"/>
+                            <Label row="3" text="{{ session.audience }}" class="t-18 p-l-15 p-b-15 p-r-15 session-info-blue" textWrap="true"/>
+                            <Label row="4" text="Room:" class="t-16 p-l-15 p-b-6 p-r-15 text-secondary" textWrap="true"/>
+                            <Label row="5" text="{{ session.room }}" class="t-18 p-l-15 p-b-15 p-r-15 session-info-blue" textWrap="true"/>
+                            <Label row="6" text="About this Session:" class="t-16 p-l-15 p-b-0 p-r-15 text-secondary" textWrap="true"/>
+                            <TextView row="7" hint="Session Description" text="{{ session.sessionDescription }}" class="t-18 p-l-15 p-b-15 p-r-15" textWrap="true" editable="false"/>
+                            <Label row="8" text="Resources:" class="t-16 p-l-15 p-b-6 p-r-15 text-secondary" textWrap="true"/>
+                            <Label row="9" id="resources" text="{{session.presenterResourcePage}}" class="t-18 p-l-15 p-b-15 p-r-15 session-info-blue" textWrap="true" tap="onLinkTapped"/>
+                       
+                           
+                        </GridLayout>
+
+                    </GridLayout>
+                </ScrollView>
+            </StackLayout>
+
+        </sd:RadSideDrawer.mainContent>
+    
+    </sd:RadSideDrawer>
+
+
+</Page>

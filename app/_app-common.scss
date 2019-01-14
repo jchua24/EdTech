@@ -1,0 +1,173 @@
+// Place any CSS rules you want to apply on both iOS and Android here.
+// This is where the vast majority of your CSS code goes.
+
+@import 'nativescript-theme-core/css/core.light.css';
+
+//Font icon
+.fa {
+   font-family: "FontAwesome";
+}
+//Action bar
+.action-item,
+NavigationButton {
+    color: $ab-color;
+}
+
+.action-item:disabled {
+    color: rgba($ab-color, 0.5);
+}
+
+Slider {
+  background-color: $accent;
+  color: $accent;
+}
+
+.text {
+    color: $blue-dark;
+}
+
+.text-primary {
+    color: $accent-dark;
+}
+
+.text-secondary {
+    color: $blue-50;
+}
+
+
+//Start - custom styles for EdTech
+
+.action-bar {
+    color: #fff;
+    background-color: #FF7021;
+}
+
+.text-secondary {
+    color:#636262;
+}
+
+.session-info-blue {
+    color:#3D8EC2;
+}
+
+.speaker-sessions-subject {
+    font-size: 18;
+    color: #FF7021;
+    padding-top:6;
+    padding-bottom: 6;
+}
+.speaker-sessions-arrow {
+    font-size: 18;
+    color: #FF7021;
+    padding-top:6;
+    padding-bottom: 6;
+}
+
+
+.social-media-icon {
+    font-family: "FontAwesome";
+    font-size: 30;
+    color: #FF7021;
+}
+
+.activity-indicator {
+    color: #FF7021;
+    width:30;
+    height:30;
+}
+
+.list-group-speaker-list {
+    background-color: #e8e8e8;
+}
+
+.list-group-item-speaker-list {
+    background-color: #e8e8e8;
+}
+
+.list-group-item-content-speaker-list {
+    margin-top: 1;
+}
+
+/* for debugging
+.list-group-item {
+    background-color: yellow;
+    border-color: blue;
+    border-width: 3;
+}
+*/
+
+/* for debugging
+.list-group-item-content {
+    background-color: red;
+}
+*/
+
+
+.list-group-item-line-divider {
+    border-bottom-width: 1;
+    border-bottom-color: #e8e8e8;
+}
+
+.list-group.list-group-item-spl {
+    background-color: #FF7021;
+    margin:10;
+}
+
+.sidedrawer-left {
+    background-color: #d8dadb;
+}
+.sidedrawer-header {
+    background-color: #d8dadb;
+}
+.sidedrawer-content {
+    background-color: #d8dadb;
+    margin-top: 15;
+    /*margin-left: 15;*/
+}
+
+.sidedrawer-content Label {
+    font-size: 18;
+    padding-left: 15;
+    padding-top: 4;
+    padding-bottom: 4;
+}
+
+
+/* 
+.tab-view-item {
+    background-color: #4D4A4A; 
+} */ 
+
+.mainPageTabView {
+
+
+}
+
+
+.list-generic-schedule {
+    margin-left: 10;
+    margin-right: 10;
+}
+
+.schedule-bold {
+    font-weight: bold; 
+}
+
+.session-selector {
+    padding: 10 0 10 10;
+}
+
+.session-selector-label {
+    font-size: 14;
+}
+
+.session-selector-dropdown {
+    font-size: 14;
+    line-height: 20;
+    /*padding: 10;*/
+}
+
+.info-block {
+    padding: 10 0 10 0;
+}
+//End - custom styles for EdTech

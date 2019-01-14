@@ -1,0 +1,27 @@
+<!--
+<StackLayout class="sidedrawer-left">
+    <StackLayout class="sidedrawer-header">
+        <Label text="Hello RadSideDrawer!" class="sidedrawer-header-brand" />
+    </StackLayout>
+    <StackLayout class="sidedrawer-content">
+        <Label text="Home" class="sidedrawer-list-item-text" />
+        <Label text="Speakers" tap="navigateToPage" class="sidedrawer-list-item-text" />
+        <Label text="School Info" tap="navigateToPage" class="sidedrawer-list-item-text" />
+    </StackLayout>
+</StackLayout>
+-->
+
+<StackLayout class="sidedrawer-left">
+    <!--
+    <StackLayout class="sidedrawer-header">
+    </StackLayout>
+    -->
+    
+    <StackLayout class="sidedrawer-content">
+        <Label text="Home" tap="navigateToPage"/>
+        <Label text="Speakers" tap="navigateToPage"  />
+        <Label text="Venue/Wifi Information" tap="navigateToPage"  />
+        <Label text="Social Media" tap="navigateToPage"  />
+        <Label text="Privacy Policy" tap="navigateToPage"  />
+    </StackLayout>
+</StackLayout>

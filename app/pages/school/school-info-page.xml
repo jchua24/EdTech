@@ -1,0 +1,53 @@
+<Page class="page" navigatingTo="onNavigatingTo" navigatingFrom="onNavigatingFrom"
+    xmlns:lv="nativescript-ui-listview"
+    xmlns:sd="nativescript-ui-sidedrawer"
+    xmlns:customControls="shared"
+    xmlns="http://schemas.nativescript.org/tns.xsd" >
+
+    <ActionBar class="action-bar">
+        <!--<NavigationButton tap="onBackButtonTap" android.systemIcon="ic_menu_back" android:visibility="collapsed" />-->
+        <NavigationButton tap="onBackButtonTap" android:icon="res://hamburger" tap="toggleDrawer" />
+        <Label class="action-bar-title" text="Venue/Wifi Information" horizontalAlignment="center" />
+    </ActionBar>
+
+
+    <sd:RadSideDrawer id="sideDrawer">
+
+        <!-- side drawer content -->
+        <sd:RadSideDrawer.drawerContent>
+            <customControls:sidedrawer />
+        </sd:RadSideDrawer.drawerContent>
+
+        <!-- The main content -->
+        <sd:RadSideDrawer.mainContent>
+
+            <GridLayout rows="auto, *" cols="*" class="page-content">
+
+                <WebView row="0" col="0" height="200" id="SchoolWebView" src="~/pages/school/SchoolMap.html"></WebView>
+
+                <GridLayout row="1" col="0" rows="auto, auto" columns="auto, *" class="m-25">
+                    
+                    <Label row="0" col="0" text="&#xf041;" class="social-media-icon m-r-12" verticalAlignment="top" horizontalAlignment="center"/>
+                    <StackLayout row="0" col="1" class="m-b-20">
+                        <Label text="{{school.name}}" textWrap="true"/>
+                        <Label text="{{school.address}}" textWrap="true"/>
+                    </StackLayout>
+
+                    <Label row="1" col="0" text="&#xf1eb;" class="social-media-icon m-r-12" verticalAlignment="top" horizontalAlignment="center"/>
+                    <StackLayout row="1" col="1" class="m-b-20">
+                        <Label text="WiFi Network" textWrap="true" class="font-weight-bold"/>
+                        <Label text="Network: " text=" {{'Network: ' + school.networkName}} " textWrap="true"/>
+                        <Label text="Password: " text=" {{'Password: ' + school.networkPassword}} " textWrap="true"/>
+                    </StackLayout>
+
+                </GridLayout>
+
+            </GridLayout>
+
+        </sd:RadSideDrawer.mainContent>
+
+    </sd:RadSideDrawer>
+
+</Page>
+
+

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+       /* Set the size of the div element that contains the map */
+      #map {
+        height: 200px;  /* The height is 200 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+    </style>
+  </head>
+  <body>
+    <!--The div element for the map -->
+    <div id="map">
+        Google Map is loading
+    </div>
+      
+    <script>
+
+      // Initialize and add the map
+      function initMap() {
+        // The location of the school
+        //William F. Bell Pkwy
+        //Richmond Hill, ON L4S 1N2
+        var school = {lat: 43.903103, lng: -79.397301};
+        // The map, centered at Uluru
+        var map = new google.maps.Map(
+            document.getElementById('map'), {zoom: 17, center: school});
+        // The marker, positioned at Uluru
+        var marker = new google.maps.Marker({position: school, map: map});
+      }
+    </script>
+    
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBILMXXoshsy0_2Wrn5dZj5dLdLBh43Vns&callback=initMap">
+    </script>
+  </body>
+</html>

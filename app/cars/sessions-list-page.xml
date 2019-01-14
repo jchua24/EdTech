@@ -1,0 +1,291 @@
+<Page class="page" navigatingTo="onNavigatingTo" navigatedTo="onNavigatedTo" navigatingFrom="onNavigatingFrom"
+    loaded="pageLoaded"
+    xmlns:lv="nativescript-ui-listview"
+    xmlns:sd="nativescript-ui-sidedrawer"
+    xmlns:CheckBox="nativescript-checkbox"
+    xmlns:dd="nativescript-drop-down"
+    xmlns:customControls="shared"
+    xmlns:PullRefresh="nativescript-pulltorefresh"
+    xmlns:RL="nativescript-ripple"
+    xmlns="http://schemas.nativescript.org/tns.xsd" >
+
+    <ActionBar class="action-bar">
+        <!--<NavigationButton ios:visibility="collapsed" android.systemIcon="ic_menu_btn_add" tap="toggleDrawer" />-->
+        <android>
+            <NavigationButton android:icon="res://hamburger" tap="toggleDrawer" />
+        </android>
+
+        <ios>
+            <ActionItem icon="res://hamburger" ios.position="left" tap="toggleDrawer" />
+        </ios>
+
+        <Label class="action-bar-title" text="YRDSB EdTech Camp 2018" horizontalAlignment="center" />
+    </ActionBar>
+
+
+    <sd:RadSideDrawer id="sideDrawer">
+
+        <!-- side drawer content -->
+        <sd:RadSideDrawer.drawerContent>
+            <customControls:sidedrawer />
+        </sd:RadSideDrawer.drawerContent>
+
+        <!-- The main content -->
+        <sd:RadSideDrawer.mainContent>
+
+            <TabView selectedIndexChanged="onSelectedIndexChanged" class="mainPageTabView" tabBackgroundColor="#d8dadb">
+                <TabView.items>
+                    <!-- START TAB #1: LANDING PAGE> --> 
+                    <TabViewItem title="HOME" ios:iconSource="res://tabIcons/home" class="tab-view-item">
+                            <TabViewItem.view>
+
+                                <ScrollView>
+                                    <StackLayout class="page-content">
+                                        <GridLayout rows="auto, auto, auto, auto, *, auto" cols="*" class="page-content">
+                                            
+                                            <!-- logos + intro message -->
+                                            <StackLayout row="0" rows="auto, *" cols="*, *" class="page-content" orientation="horizontal" horizontalAlignment="center">
+                                                <Image src="res://icon1024" row="0" col="0"  style="margin-top: 4; margin-left: 4; float:left" width="100" height="100" textWrap="true"/>
+                                                <Image src="res://yrdsblogo" row="0" col="1" style="margin-top: 4; float:right" width="300" height="100" textWrap="true"/>
+
+                                            <!-- >
+                                                <Image src="~/Icon-1024" row="0" col="0"  style="margin-top: 4; margin-left: 4; float:left" width="100" height="100" textWrap="true"/>
+                                                <Image src="~/YRDSB-logo" row="0" col="1" style="margin-top: 4; float:right" width="300" height="100" textWrap="true"/>
+                                            --> 
+
+                                            </StackLayout>
+
+                                            <Label row="1" style="margin-top: 16; margin-bottom: 6; text-align: center; font-weight: bold;" text="Welcome to YRDSB EdTech Camp 2018!" textWrap="true"/>
+
+                                            <!-- Speaker divider line -->
+                                            <StackLayout row="2" class="hr-dark m-100"/>
+                                            
+                                            <!-- school location + wifi information -->
+                                            <GridLayout row="3" rows="auto, *" cols="*" class="page-content">
+
+                                                <WebView row="0" col="0" height="200" id="SchoolWebView" src="~/pages/school/SchoolMap.html"></WebView>
+
+                                                <GridLayout row="1" col="0" rows="auto, auto" columns="auto, *" class="m-25">
+                                                    
+                                                    <Label row="0" col="0" text="&#xf041;" class="social-media-icon m-r-12" verticalAlignment="top" horizontalAlignment="center"/>
+                                        
+                                                    <StackLayout class="info-block" row="0" col="1" >
+                                                        <Label text="Location" textWrap="true" class="font-weight-bold" />
+                                                        <Label text="{{'Name: ' +  school.name}} " textWrap="true" />
+                                                        <Label text="{{'Address: ' + school.address}}" textWrap="true"/>
+                                                    </StackLayout>
+                                        
+                                                    <Label row="1" col="0" text="&#xf1eb;" class="social-media-icon m-r-12" verticalAlignment="top" horizontalAlignment="center"/>
+                                                    <StackLayout class="info-block" row="1" col="1" class="m-b-20">
+                                                        <Label text="WiFi Network" textWrap="true" class="font-weight-bold"/>
+                                                        <Label text=" {{'Network: ' + school.networkName}} " textWrap="true"/>
+                                                        <Label text=" {{'Password: ' + school.networkPassword}} " textWrap="true"/>
+                                                    </StackLayout>
+
+                                                </GridLayout>
+                                            </GridLayout>
+
+                                            <!-- generic day schedule -->
+                                            <ListView row="4" col="0" height="320" items="{{schedule}}" class="list-group list-generic-schedule" itemTemplateSelector="scheduleTemplateSelector">
+                                                <ListView.listViewLayout>
+                                                    <lv:ListViewLinearLayout scrollDirection="Vertical" />
+                                                </ListView.listViewLayout>
+                                                
+                                                <ListView.itemTemplates>
+                                                    <template key="header" >
+                                                        <GridLayout rows="*" columns="130, *" class="list-group-item-content schedule-bold" style="padding-left:4; margin-left:6; margin-right:6; margin-bottom:2; background-color:#FF7021;">
+                                                            <Label row="0" col="0" text="Time" style="padding-top:2;padding-bottom:2;"/>
+                                                            <Label row="0" col="1" text="Activity"/>
+                                                        </GridLayout>
+                                                    </template>
+
+                                                    <template key="middle">
+                                                        <GridLayout rows="*" columns="130, *" class="list-group-item-content" style="padding-left:4; margin-left:6; margin-right:6; margin-bottom:2; background-color:#d8dadb;">
+                                                            <Label row="0" col="0" text="{{time}}"/>
+                                                            <Label row="0" col="1" text="{{activity}}"/>
+                                                        </GridLayout>
+                                                    </template>
+
+                                                    <template key="footer">
+                                                        <GridLayout rows="*" columns="*" class="list-group-item-content schedule-bold" style="padding-left:4; margin-left:6; margin-right:6; margin-bottom:2; background-color:#FF7021;">
+                                                            <Label row="0" col="0" text="{{activity}}" style="padding-top:2;padding-bottom:2;"/> 
+                                                        </GridLayout>
+                                                    </template>
+                                                </ListView.itemTemplates>
+                                                
+                                            </ListView>
+
+                                            <Label row="5" text="Navigate through the app by using the sidedrawer to the left or the schedule tabs to the right." textWrap="true" editable="false" width="100%" style="padding:6;"/>
+
+                                        </GridLayout>
+                                    </StackLayout>  
+                                </ScrollView>
+                            </TabViewItem.view>
+                    </TabViewItem>
+
+                    <!-- START TAB #2: Full Schedule -->
+                    <TabViewItem title="SCHEDULE" ios:iconSource="res://tabIcons/list-simple-7" class="tab-view-item">
+                        <TabViewItem.view>
+                            <!-- <TabViewItem.view> must only contain one child view! -->
+                            <GridLayout rows="auto, *, 1" columns="*" >
+                                <GridLayout style.backgroundColor="#d8dadb" class="session-selector" row="0" col="0" rows="*" columns="auto, *" orientation="horizontal" >
+                                   <Label row="0" col="0" text="Currently Viewing: " class="session-selector-label"/>
+                                   <dd:DropDown row="0" col="1" id="dd" class="session-selector-dropdown" selectedIndexChanged="dropDownSelectedIndexChanged" hint="Select a session"/>
+                                </GridLayout>
+                                
+                                <lv:RadListView row="1" col="0" id="allSessionsList" items="{{ sessions }}" itemTap="onSessionItemTap" class="list-group" pullToRefresh="true" pullToRefreshInitiated="onPullToRefreshInitiated">
+                                    <lv:RadListView.listViewLayout>
+                                        <lv:ListViewLinearLayout scrollDirection="Vertical" />
+                                    </lv:RadListView.listViewLayout>
+
+                                    <lv:RadListView.itemTemplate>
+                                        <StackLayout class="list-group-item list-group-item-line-divider" visibility="{{ visible ? 'visible' : 'collapse' }}">
+
+                                            <!-- This GridLayout represents one session object/row -->
+                                            <!--<RL:Ripple rippleColor="#fff">-->
+                                            <GridLayout rows="*" columns="*, auto" class="list-group-item-content">
+
+                                                <!-- Session detail body -->
+                                                <StackLayout row="0" col="0" verticalAlignment="center" class="list-group-item-text">
+                                                    <Label textWrap="true" class="p-b-10 fa">
+                                                        <FormattedString ios:fontFamily="system">
+                                                            <Span text="{{ sessionTitle }}" class="font-weight-bold"/>
+                                                        </FormattedString>
+                                                    </Label>
+                                                    <Label textWrap="true" text="" class="p-b-10">
+                                                        <FormattedString ios:fontFamily="system">
+                                                            <Span text="Spotlight/General: " />
+                                                            <Span text="{{ firstName + ' ' + lastName }}" class="session-info-blue"/>
+                                                        </FormattedString>
+                                                    </Label>
+                                                    <GridLayout rows="*, *" columns ="*, *">
+                                                        <Label row="0" col="0" textWrap="true" text="{{ level }}" class="p-b-10 session-info-blue" />
+                                                        <Label row="0" col="1" textWrap="true" class="p-b-10">
+                                                            <FormattedString ios:fontFamily="system">
+                                                                <Span text="Room: " />
+                                                                <Span text="{{ room }}" />
+                                                            </FormattedString>
+                                                        </Label>
+                                                        
+                                                        <Label row="1" col="0" textWrap="true" class="p-b-10">
+                                                            <FormattedString ios:fontFamily="system">
+                                                                <Span text="Session: " />
+                                                                <Span text="{{ session }}" />
+                                                            </FormattedString>
+                                                        </Label> 
+
+                                                        <Label row="1" col="1" textWrap="true" class="p-b-10">
+                                                            <FormattedString ios:fontFamily="system">
+                                                                <Span text="Time: " />
+                                                                <Span text="{{ time }}" />
+                                                            </FormattedString>
+                                                        </Label>
+
+                                                    </GridLayout>
+                                                </StackLayout>
+
+                                                <StackLayout row="0" col="1" verticalAlignment="center" class="list-group-item-text">
+                                                    <Label class="p-b-10" tap="onTabStarTapped">
+                                                        <FormattedString ios:fontFamily="system">
+                                                            <Span text='{{ starred ? "&#xf005;" : "&#xf006;" }}' class='{{ starred ? "fa t-25 c-lemon" : "fa t-25 c-grey-dark" }}' />
+                                                        </FormattedString>
+                                                    </Label>
+                                                </StackLayout>
+
+                                            </GridLayout>
+                                            <!--</RL:Ripple>-->
+                                        </StackLayout>
+                                    </lv:RadListView.itemTemplate>
+                                </lv:RadListView>
+
+                                <ActivityIndicator row="1" rowspan="2" color="orange" busy="{{ isLoading }}" width="60" height="60" class="activity-indicator"></ActivityIndicator>
+                            </GridLayout>
+                        </TabViewItem.view>
+                    </TabViewItem>
+                    <!-- END TAB #2 -->
+
+
+                    <!-- START TAB #3: Selected Sessions -->
+                    <TabViewItem title="SELECTED" ios:iconSource="res://tabIcons/star-7" class="tab-view-item">
+                        <TabViewItem.view>
+                            <!-- <TabViewItem.view> must only contain one child view! -->
+                            <lv:RadListView id="selectedSessionsList" items="{{sessions}}" itemTap="onSessionItemTap" class="list-group"> 
+                                <lv:RadListView.listViewLayout>
+                                    <lv:ListViewLinearLayout scrollDirection="Vertical" />
+                                </lv:RadListView.listViewLayout>
+
+                                <lv:RadListView.itemTemplate>
+                                        <StackLayout class="list-group-item list-group-item-line-divider" visibility="{{ starred ? 'visible' : 'collapse' }}">
+
+                                            <!-- This GridLayout represents one session object/row -->
+                                            <!--<RL:Ripple rippleColor="#fff">-->
+                                            <GridLayout rows="*" columns="*, auto" class="list-group-item-content">
+
+                                                <!-- Session detail body -->
+                                                <StackLayout row="0" col="0" verticalAlignment="center" class="list-group-item-text">
+                                                    <Label textWrap="true" class="p-b-10 fa">
+                                                        <FormattedString ios:fontFamily="system">
+                                                            <Span text="{{ sessionTitle }}" class="font-weight-bold"/>
+                                                        </FormattedString>
+                                                    </Label>
+                                                    <Label textWrap="true" text="" class="p-b-10">
+                                                        <FormattedString ios:fontFamily="system">
+                                                            <Span text="Spotlight/General: " />
+                                                            <Span text="{{ firstName + ' ' + lastName }}" class="session-info-blue"/>
+                                                        </FormattedString>
+                                                    </Label>
+                                                    <GridLayout rows="*, *" columns ="*, *">
+                                                        <Label row="0" col="0" textWrap="true" text="{{ level }}" class="p-b-10 session-info-blue" />
+                                                        <Label row="0" col="1" textWrap="true" class="p-b-10">
+                                                            <FormattedString ios:fontFamily="system">
+                                                                <Span text="Room: " />
+                                                                <Span text="{{ room }}" />
+                                                            </FormattedString>
+                                                        </Label>
+                                                        
+                                                        <Label row="1" col="0" textWrap="true" class="p-b-10">
+                                                            <FormattedString ios:fontFamily="system">
+                                                                <Span text="Session: " />
+                                                                <Span text="{{ session }}" />
+                                                            </FormattedString>
+                                                        </Label> 
+
+                                                        <Label row="1" col="1" textWrap="true" class="p-b-10">
+                                                            <FormattedString ios:fontFamily="system">
+                                                                <Span text="Time: " />
+                                                                <Span text="{{ time }}" />
+                                                            </FormattedString>
+                                                        </Label>
+
+                                                    </GridLayout>
+                                                </StackLayout>
+
+                                                <StackLayout row="0" col="1" verticalAlignment="center" class="list-group-item-text">
+                                                    <Label class="p-b-10" tap="onTabStarTapped">
+                                                        <FormattedString ios:fontFamily="system">
+                                                            <Span text='{{ starred ? "&#xf005;" : "&#xf006;" }}' class='{{ starred ? "fa t-25 c-lemon" : "fa t-25 c-grey-dark" }}' />
+                                                        </FormattedString>
+                                                    </Label>
+                                                </StackLayout>
+
+                                            </GridLayout>
+                                            <!--</RL:Ripple>-->
+                                        </StackLayout>
+                                    </lv:RadListView.itemTemplate>
+                            </lv:RadListView>
+
+                        </TabViewItem.view>
+                    </TabViewItem>
+                    <!-- END TAB #3 -->
+
+
+                </TabView.items>
+            </TabView> 
+
+        </sd:RadSideDrawer.mainContent>
+
+    </sd:RadSideDrawer>
+
+
+
+</Page>
